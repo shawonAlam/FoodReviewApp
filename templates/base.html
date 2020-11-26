@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title%} {% endblock %}</title>
+
+  {% include 'base/css.html' %}
+
+  {% block stylesheet %} {% endblock %}
+
+</head>
+
+<body>
+  {% include 'base/navbar.html' %}
+
+  <!-- Page Content -->
+  <div class="container">
+
+        {% block slider %}
+            {% include 'base/slider.html' %} 
+        {% endblock %}   
+
+    <!-- Content Row -->
+    <div class="row my-3">
+
+        {% block carosel %}
+
+        {% endblock %}
+        
+        {% block content %}
+
+
+
+
+        {% endblock %}
+
+        {% block pagination %}
+        
+        {% endblock %}
+      
+
+    </div>
+    <!-- /.row -->
+    
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+
+      <footer class="py-3 bg-info">
+          <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Petuk Food 2019</p>
+          </div>
+      </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  {% include 'base/js.html'%}
+
+</body>
+
+</html>

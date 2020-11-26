@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- font awesome -->
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+
+
+
+    
+
+    <div class="card m-auto">
+        <div class="row ">
+            <div class="col col-md-6">
+                    <h3 class="card-header text-left text-info" style="font-family: 'Oswald', sans-serif;"><b><i class="fas fa-file-signature"></i>&nbsp;&nbsp;REVIEWS</b> </h3>
+            </div>
+            {% if request.user.is_authenticated %}
+                <div class="col col-md-6">
+                        <h3 class="card-header text-info text-right"><b>Add a Reviews</b></h3>
+                </div>
+            {% else %}
+                <div class="col col-md-6">
+                    <h3 class="card-header text-info text-right"><b><a href="{% url 'login' %}" role="button">Login to Add Reviews</a></b></h3>
+                </div>
+            {% endif %}
+        <!-- </div> -->
+            
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        {% for review in restaurant_object.restaurantreview_set.all %}
+                            <h5 class="card-title"><b><i class="fas fa-user-circle"></i> {{ review.user }}</b><small> on {{ review.date }}</small> </h5>
+                            <p class="card-text"><b class="text text-info"> {{ review.rating }} Star{{ review.rating|pluralize }} </b>{{ review.comment }}</p><hr>
+                        {% empty %}
+                            <li>Sorry, no reviews for this restaurant yet. You can add a review. </li>
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{% url 'review-create' restaurant_object.id %}" method="POST">
+                            {% csrf_token %}
+                            <b>Comment: </b><br><textarea name="comment" id="comment" rows="" class="form-control"></textarea>
+
+                            <p class="mt-3"><b>Rating:</b></p>
+
+                            {% for rate in RATING_CHOICES %}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" />
+                                <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br/>
+                            {% endfor %}
+
+                            <input type="submit" value="Review" class="text text-info"/>
+                        </form>
+                    </div>
+                </div>
+              
+            </div>
+        </div> <!-- row end -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

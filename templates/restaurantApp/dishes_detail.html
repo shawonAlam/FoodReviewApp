@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Dishes Detail{% endblock %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col"></div>
+        <div class="col-6">
+                <div class="card">
+                        <div class="card-header text-center">
+                          <b class="text-info">Dishes Detail</b>
+                          
+                        </div>
+                        <div class="card-body">
+                            <img src="{{ dishes_detail.image.url }}" alt="{{ dishes_detail.title }} picture" width="348px" height="300px">
+                            <br>
+                            <h2>{{ dishes_detail.name }}</h2>
+                            <br>
+                            <p>Price - {{ dishes_detail.price }} TK.</p> 
+                            <br><hr>
+                            <p>{{ dishes_detail.description }}</p>
+                            <br>
+                        </div>
+                      </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+{% endblock %}

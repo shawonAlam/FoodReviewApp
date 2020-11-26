@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+      <div class="col col-md-offset-3"></div>
+      <div class="col col-md-6 col-md-offset-3">
+          <div class="card">
+              <div class="card-header text-center">
+                <b class="text-info">Login</b>
+              </div>
+              <div class="card-body">
+                  <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+
+                    {{ form|crispy }}
+
+                    {{ form.errors }}
+
+                    Forget password? <a href="{% url 'password_reset' %}">Recovery link</a> <br><br>
+                      
+                    <button type="submit" class="btn btn-success">Submit</button>
+                  </form>
+              </div>
+            </div>
+      </div>
+      <div class="col col-md-offset-3"></div>
+    </div>
+</div>
+
+
+{% endblock %}
